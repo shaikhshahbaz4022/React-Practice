@@ -34,7 +34,16 @@ function Todo() {
         })
         setTodos(updatedTodos)
     }
-
+    function handleDelete(id) {
+        let updatedTodos = todos.filter((todo) => {
+            if (todo.id === id) {
+                return false
+            } else {
+                return true
+            }
+        })
+        setTodos(updatedTodos)
+    }
 
     return (
 
@@ -50,6 +59,7 @@ function Todo() {
                         status={ele.status}
                         id={ele.id}
                         HandleStatus={HandleStatus}
+                        handleDelete={handleDelete}
 
                     />
                 ))}
