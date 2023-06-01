@@ -3,10 +3,10 @@ import TodoItems from "./TodoItems"
 import AddTodos from "./AddTodo"
 
 
-
+//useReduce
 function Todo() {
     const [todos, setTodos] = useState([])
-
+     console.log(todos);
     const handleAddTodos = (text) => {
         const todoItem = {
             id: Math.floor(Math.random() * 1000),
@@ -22,26 +22,12 @@ function Todo() {
     }
 
     const HandleStatus = (id) => {
-        const updatedTodos = todos.map((ele) => {
-            if (ele.id === id) {
-                return {
-                    ...ele,
-                    status: !ele.status
-                }
-            } else {
-                return ele
-            }
-        })
+      const updatedTodos = todos.map((ele)=> ele.id===id ? {...ele , status : !ele.status} : ele)
+    
         setTodos(updatedTodos)
     }
     function handleDelete(id) {
-        let updatedTodos = todos.filter((todo) => {
-            if (todo.id === id) {
-                return false
-            } else {
-                return true
-            }
-        })
+        let updatedTodos = todos.filter((todo) =>todo.id !== id)
         setTodos(updatedTodos)
     }
 
