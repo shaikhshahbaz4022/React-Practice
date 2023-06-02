@@ -1,12 +1,16 @@
 import Button from "./Button"
 
-function Quantity({ quantity }) {
+function Quantity({ id, quantity, Quantityhandle  }) {
 
-    return <div>
+
+    return <div style={{
+        display: "flex",
+        alignItems: "center"
+    }}>
+
+        <Button onclick={() => Quantityhandle(id, -1)} text="-" />
         <p>QTY :-  {quantity}</p>
-        
-        <Button text="-" />
-        <Button text="+" />
+        <Button onclick={() => Quantityhandle(id, 1)} text="+" />
     </div>
 }
 export default Quantity  

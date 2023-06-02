@@ -12,16 +12,37 @@ const cartItems = [
 
 
 function CartContainer() {
-  let [cart,setCart] = useState(cartItems)
+  let [cart, setCart] = useState(cartItems)
+
+  function Quantityhandle(id, val) {
+    let UpdatedQuantity = cart.map((ele) => (
+
+
+      ele.id === id
+        ? {
+          ...ele,
+          quantity: ele.quantity + val
+        } 
+        : ele
+
+    ))
+    setCart(UpdatedQuantity)
+  }
+
+
+  const TotalDisplay =  cart.reduce((acc,cur)=> acc + cur.price * cur.quantity ,0)
+
+
   return (
     <div className="App">
-     {
-     cart.map((ele)=>(
+      <h1>Add To Cart</h1>
+            {
+        cart.map((ele) => (
 
-       <CartItems key={ele.id} {...ele}  />
-     ))
-     }
-      <Total />
+          <CartItems  Quantityhandle={Quantityhandle} key={ele.id} {...ele} />
+        ))
+      }
+      <Total TotalDisplay={TotalDisplay} />
     </div>
   );
 }

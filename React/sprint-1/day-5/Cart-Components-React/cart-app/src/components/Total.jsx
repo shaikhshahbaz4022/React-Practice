@@ -1,4 +1,4 @@
-function Total(){
-    return <h1>Total</h1>
+function Total({TotalDisplay}){
+    return <h1> total :- {TotalDisplay}</h1>
 }
 export default Total
