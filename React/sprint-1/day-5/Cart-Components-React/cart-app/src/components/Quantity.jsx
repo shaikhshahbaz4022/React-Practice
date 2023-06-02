@@ -1,9 +1,12 @@
 import Button from "./Button"
 
-function Quantity(){
+function Quantity({ quantity }) {
 
-    return <>
-    <Button/>
-    </>
-  }
+    return <div>
+        <p>QTY :-  {quantity}</p>
+        
+        <Button text="-" />
+        <Button text="+" />
+    </div>
+}
 export default Quantity  

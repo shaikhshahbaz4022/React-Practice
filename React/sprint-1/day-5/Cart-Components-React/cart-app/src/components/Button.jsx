@@ -1,4 +1,4 @@
-function Button(){
-    return <button></button>
+function Button({text , onclick}){
+    return <button onclick={onclick} >{text}</button>
 }
 export default Button

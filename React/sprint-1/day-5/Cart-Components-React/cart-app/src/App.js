@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 import CartItems from './components/CartItems';
 import Total from './components/Total';
@@ -11,12 +12,15 @@ const cartItems = [
 
 
 function CartContainer() {
+  let [cart,setCart] = useState(cartItems)
   return (
     <div className="App">
-      <CartItems />
-      <CartItems />
-      <CartItems />
-      <CartItems />
+     {
+     cart.map((ele)=>(
+
+       <CartItems key={ele.id} {...ele}  />
+     ))
+     }
       <Total />
     </div>
   );

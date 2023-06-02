@@ -1,6 +1,9 @@
-function LabelPrice(){
+function LabelPrice({label, price}){
     return (
-      <>LabelPrice</>
+      <div>
+        <p>{label}</p>
+        <p>INR :- {price}</p>
+      </div>
     )
   }
   export default LabelPrice

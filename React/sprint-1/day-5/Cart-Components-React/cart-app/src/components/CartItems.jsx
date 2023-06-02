@@ -1,11 +1,11 @@
 import LabelPrice from "./LabelPrice"
 import Quantity from "./Quantity"
 
-function CartItems() {
+function CartItems({id,label,price,quantity}) {
     return (
         <div>
-            <LabelPrice />
-            <Quantity />
+            <LabelPrice label={label} price={price} />
+            <Quantity quantity={quantity} />
         </div>
     )
 }
