@@ -5,10 +5,11 @@ import PostsItems from './components/postsItems';
 
 function App() {
 
-  let [data, setdata] = useState([])
-  let [loader, setLoader] = useState(false)
-  let [err, seterr] = useState(false)
-  let [page, setPage] = useState(1)
+  let [data, setdata] = useState([]) // storing Data
+  let [loader, setLoader] = useState(false) // for loader
+  let [err, seterr] = useState(false) // for error handling
+  let [page, setPage] = useState(1)  // for maintaining The Page Count
+
   let [limit, setLimit] = useState(10)
   let [totalPages, setPagesLength] = useState(0)
 
@@ -17,28 +18,31 @@ function App() {
   }, [page, limit])
 
 
-  const  getData = async (page, limit)=>{
+  const getData = async (page, limit) => {
 
     try {
-     let res =  await  fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}&_page=${page}`)
-      let dataLength =Number(res.headers.get("X-Total-Count")) 
-     let dataa =  await res.json()
-       return{
-        data : dataa,
-        dataLength : dataLength
-       }
+      let res = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}&_page=${page}`)
+
+      //Getting All Data Length using this --->
+      let dataLength = Number(res.headers.get("X-Total-Count"))
+      let dataa = await res.json()
+      // returning in the form of object
+      return {
+        posts: dataa,
+        PostsLength: dataLength
+      }
     } catch (error) {
-      
+      console.log(error);
     }
-   
+
   }
   const fetchAndrender = (page, limit) => {
     setLoader(true) // loader Functionality
-     getData(page, limit) //getting data from fetch
+    getData(page, limit) //getting data from fetch
       .then((res) => {
-        let {data , dataLength} = res
-        setPagesLength(Math.ceil(dataLength/limit))
-        setdata(data) // setting data into data variable
+        let { posts, PostsLength } = res
+        setPagesLength(Math.ceil(PostsLength / limit))
+        setdata(posts) // setting data into data variable
         setLoader(false)
       })
       .catch(() => {
@@ -52,7 +56,7 @@ function App() {
   if (err) {
     return <h1>error , refresh again</h1>
   }
- 
+
   return (
     <div className='App'>
 
@@ -69,17 +73,21 @@ function App() {
         {
           data.map((ele) => (
             <PostsItems key={ele.id} {...ele} />
-                // ...ele === id={id} title={title} ,it passes all the keys , you only need to destructure it
+            // ...ele === id={id} title={title} ,it passes all the keys , you only need to destructure it
           ))
         }
       </div>
       <div>
-      {
-        new Array(totalPages).fill(0).map((ele , ind)=>(
+        {
+          // creating buttons using new Array Method
 
-          <button onClick={()=>setPage(ind + 1)} >{ind +1}</button>
-        ))
-      }
+          new Array(totalPages).fill(0).map((ele, ind) => (
+
+            //  ind =0 , we have to start page no from 1 , thats why ind+1 = 1
+
+            <button onClick={() => setPage(ind + 1)} >{ind + 1}</button>
+          ))
+        }
       </div>
 
 
