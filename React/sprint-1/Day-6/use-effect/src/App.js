@@ -30,12 +30,12 @@ function App() {
   let [page, setPage] = useState(1)
 
   useEffect(() => {
-    fetchAndrender()
-  }, [])
+    fetchAndrender(page)
+  }, [page])
 
-  const fetchAndrender = () => {
+  const fetchAndrender = (page) => {
     setLoader(true)
-    fetch("https://jsonplaceholder.typicode.com/posts?_limit=10")
+    fetch(`https://jsonplaceholder.typicode.com/posts?_limit=10&_page=${page}`)
       .then((res) => res.json())
       .then((res) => {
 
@@ -53,6 +53,10 @@ function App() {
   if (err) {
     return <h1>error , refresh again</h1>
   }
+  function handlePage(val) {
+    let updatedPage = page + val
+    setPage(updatedPage)
+  }
 
   return (
     <div className='App'>
@@ -65,9 +69,9 @@ function App() {
         }
       </div>
       <div>
-        <button disabled={page<=1} onClick={()=>setPage(page-1)}>Previous</button>
+        <button disabled={page <= 1} onClick={()=>handlePage(-1)}>Previous</button>
         <button disabled>{page}</button>
-        <button onClick={()=>setPage(page+1)}>NEXT</button>
+        <button onClick={()=>handlePage(1)}>NEXT</button>
 
       </div>
 
