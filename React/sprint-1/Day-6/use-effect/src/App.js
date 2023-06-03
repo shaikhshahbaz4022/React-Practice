@@ -28,15 +28,25 @@ function App() {
   let [loader, setLoader] = useState(false)
   let [err, seterr] = useState(false)
   let [page, setPage] = useState(1)
+  let [limit, setLimit] = useState(10)
+  let [datalimit, setdataLimit] = useState(0)
 
   useEffect(() => {
-    fetchAndrender(page)
-  }, [page])
+    fetchAndrender(page, limit)
+  }, [page, limit])
 
-  const fetchAndrender = (page) => {
+  const fetchAndrender = (page, limit) => {
     setLoader(true)
-    fetch(`https://jsonplaceholder.typicode.com/posts?_limit=10&_page=${page}`)
-      .then((res) => res.json())
+    fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}&_page=${page}`)
+      .then((res) => {
+        let x = res.headers.get("X-Total-Count")
+        setdataLimit(x)
+        return res.json()
+
+      }
+
+
+      )
       .then((res) => {
 
         setdata(res)
@@ -61,6 +71,13 @@ function App() {
   return (
     <div className='App'>
       <div>
+        <button onClick={() => setLimit(10)} >10</button>
+        <button onClick={() => setLimit(20)} >20</button>
+        <button onClick={() => setLimit(50)} >50</button>
+
+
+      </div>
+      <div>
         {
           data.map((ele) => (
             <PostsItems key={ele.id} {...ele} />
@@ -69,10 +86,10 @@ function App() {
         }
       </div>
       <div>
-        <button disabled={page <= 1} onClick={()=>handlePage(-1)}>Previous</button>
+        <button disabled={page <= 1} onClick={() => handlePage(-1)}>Previous</button>
         <button disabled>{page}</button>
-        <button onClick={()=>handlePage(1)}>NEXT</button>
-
+        <button disabled={page >= Math.ceil(datalimit / limit)} onClick={() => handlePage(1)}>NEXT</button>
+            {/* 3 >= ceil(100/20) */}
       </div>
 
 
