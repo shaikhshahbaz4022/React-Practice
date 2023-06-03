@@ -27,7 +27,7 @@ function App() {
   let [data, setdata] = useState([])
   let [loader, setLoader] = useState(false)
   let [err, seterr] = useState(false)
-
+  let [page, setPage] = useState(1)
 
   useEffect(() => {
     fetchAndrender()
@@ -56,12 +56,21 @@ function App() {
 
   return (
     <div className='App'>
-      {
-        data.map((ele) => (
-          <PostsItems key={ele.id} {...ele} />
-  
-      ))
-      }
+      <div>
+        {
+          data.map((ele) => (
+            <PostsItems key={ele.id} {...ele} />
+
+          ))
+        }
+      </div>
+      <div>
+        <button disabled={page<=1} onClick={()=>setPage(page-1)}>Previous</button>
+        <button disabled>{page}</button>
+        <button onClick={()=>setPage(page+1)}>NEXT</button>
+
+      </div>
+
 
     </div>
   )
