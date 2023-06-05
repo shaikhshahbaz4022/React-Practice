@@ -27,23 +27,31 @@ function Todo() {
         }
     }
 
-    function UpdateNewTodo(updatedTodo) {
-        fetch("http://localhost:8080/todos", {
-            method: "PATCH",
+    function UpdateNewTodo(id, updatedTodo) {
+        fetch(`http://localhost:8080/todos/${id}`, {
+            method: "PUT",
             headers: {
                 "Content-Type": "Application/json"
             },
             body: JSON.stringify(updatedTodo)
         })
-        .then((res)=>res.json())
-        .then(()=>{
+            .then((res) => res.json())
+            .then(() => {
+                fetchAndDisplay()
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+    
+    function DeleteReq(id){
+        fetch(`http://localhost:8080/todos/${id}`,{
+         method : "DELETE"
+             
+        }).then(()=>{
             fetchAndDisplay()
         })
-        .catch((err)=>{
-            console.log(err);
-        })
     }
-
     function addNewTodos(newTodo) {
         fetch("http://localhost:8080/todos", {
             method: "POST",
@@ -71,10 +79,10 @@ function Todo() {
 
     return <div>
 
-        <AddTodo allTodos={todos} addNewTodos={addNewTodos} UpdateNewTodo={UpdateNewTodo} />
+        <AddTodo allTodos={todos} addNewTodos={addNewTodos}  />
         {
             todos.map((ele) => (
-                <TodoItem key={ele.id} {...ele}  />
+                <TodoItem key={ele.id} {...ele} UpdateNewTodo={UpdateNewTodo}  DeleteReq={DeleteReq} />
 
             ))
         }
