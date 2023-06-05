@@ -8,6 +8,7 @@ function Todo() {
     let [todos, setTodos] = useState([])
     let [loading, setLoading] = useState(false)
     let [Error, setError] = useState(false)
+
     // mount phase 
     useEffect(() => {
         fetchAndDisplay()
@@ -24,6 +25,23 @@ function Todo() {
             setError(true)
             setLoading(false)
         }
+    }
+
+    function UpdateNewTodo(updatedTodo) {
+        fetch("http://localhost:8080/todos", {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "Application/json"
+            },
+            body: JSON.stringify(updatedTodo)
+        })
+        .then((res)=>res.json())
+        .then(()=>{
+            fetchAndDisplay()
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
     }
 
     function addNewTodos(newTodo) {
@@ -53,10 +71,10 @@ function Todo() {
 
     return <div>
 
-        <AddTodo addNewTodos={addNewTodos} />
+        <AddTodo allTodos={todos} addNewTodos={addNewTodos} UpdateNewTodo={UpdateNewTodo} />
         {
             todos.map((ele) => (
-                <TodoItem key={ele.id} {...ele} />
+                <TodoItem key={ele.id} {...ele}  />
 
             ))
         }
