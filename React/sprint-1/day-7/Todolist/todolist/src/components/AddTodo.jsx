@@ -1,7 +1,26 @@
-function AddTodo({title,status}){
-    return <div style={{border:"1px solid black" , margin:"10px"}}>
-        <p>{title}</p>
-        <p>{status ? "Compleated" : "Not Compleated"}</p>
+import { useState } from "react"
+
+function AddTodo({ addNewTodos }) {
+    let [text, setText] = useState("")
+
+    function AddNewTodo() {
+        let newTodo = {
+            "title": text,
+            "status": false
+        }
+        addNewTodos(newTodo)
+
+    }
+
+
+    return <div>
+        <input
+            value={text}
+            placeholder="Add new todo"
+            onChange={(e) => setText(e.target.value)}
+
+        />
+        <button onClick={AddNewTodo} >ADD TODO</button>
     </div>
 }
 export default AddTodo

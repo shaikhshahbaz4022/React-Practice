@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react"
+
+
+import TodoItem from "./TodoItem"
 import AddTodo from "./AddTodo"
 
 function Todo() {
     let [todos, setTodos] = useState([])
     let [loading, setLoading] = useState(false)
     let [Error, setError] = useState(false)
-
-    useEffect(()=>{
+    // mount phase 
+    useEffect(() => {
         fetchAndDisplay()
-    },[])
+    }, [])
 
     async function fetchAndDisplay() {
         try {
@@ -23,17 +26,37 @@ function Todo() {
         }
     }
 
-    if(loading){
+    function addNewTodos(newTodo) {
+        fetch("http://localhost:8080/todos", {
+            method: "POST",
+            headers: {
+                "Content-Type": "Application/json"
+            },
+            body: JSON.stringify(newTodo)
+
+        })
+            .then((res) => res.json())
+            .then(() => {
+                fetchAndDisplay()
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
+    if (loading) {
         return <p>Loading....</p>
     }
-    if (Error){
+    if (Error) {
         return <p>Error is occured</p>
     }
 
     return <div>
+
+        <AddTodo addNewTodos={addNewTodos} />
         {
-            todos.map((ele)=>(
-                <AddTodo key={ele.id} {...ele}/>
+            todos.map((ele) => (
+                <TodoItem key={ele.id} {...ele} />
 
             ))
         }
