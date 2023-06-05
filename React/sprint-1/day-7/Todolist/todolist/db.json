@@ -3,7 +3,7 @@
     {
       "id": 1,
       "title": "Learn Javascript",
-      "status": false
+      "status": true
     },
     {
       "id": 2,
@@ -12,8 +12,13 @@
     },
     {
       "id": 3,
-      "title": "Learn HTML",
-      "status": false
+      "title": "Learn CSS",
+      "status": true
+    },
+    {
+      "title": "LEARN JAVA",
+      "status": false,
+      "id": 4
     }
   ]
 }

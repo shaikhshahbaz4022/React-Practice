@@ -17,8 +17,10 @@ function TodoItem({ title, status, id, UpdateNewTodo, DeleteReq }) {
         <p>{id}</p>
         <p>{title}</p>
         <p style={{ color: status ? "green" : "red", fontWeight: "bold" }}>{status ? "Completed" : "Not Completed"}</p>
-        <button onClick={Updated}>TOGGLE</button>
-        <button onClick={DelOnClick}>DELETE</button>
+
+        <button style={{padding:"4px" , margin:"5px" ,backgroundColor : status ? "red" : "green" ,color:"white"}} onClick={Updated}>{status ? "NOT-COMP" : "COMPLETED"}</button>
+
+        <button style={{padding:"4px" , margin:"5px" ,backgroundColor : "red"  ,color:"white" }} onClick={DelOnClick}>DELETE</button>
     </div>
 }
 export default TodoItem
