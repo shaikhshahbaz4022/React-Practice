@@ -7,6 +7,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the project directory, you can run:
 
 ### `npm start`
+### `npm run json` to start jaon server 
+
+![Alt Image]("https://github.com/shaikhshahbaz4022/React-Practice/assets/119395145/7af587fa-5e2f-49a6-8caf-5abc288318ef")
+
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
