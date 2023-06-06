@@ -3,10 +3,10 @@ import { useEffect, useRef, useState } from "react"
 function Timer() {
     let [count, setCount] = useState(10)
     let TimerRef = useRef(null)
-
+ console.log(TimerRef.current);
     useEffect(() => {
         const Cleanup = () => {
-           StopFunc()
+            StopFunc()
         }
         return Cleanup
     }, [])
@@ -14,6 +14,9 @@ function Timer() {
 
 
     function TimerFunc() {
+        if (TimerRef.current !== null) {
+            return
+        }
         TimerRef.current = setInterval(() => {
             setCount((previouscount) => {
                 if (previouscount <= 1) {
@@ -28,6 +31,7 @@ function Timer() {
     }
     const StopFunc = () => {
         clearInterval(TimerRef.current)
+        TimerRef.current = null
     }
     return (
         <div>
