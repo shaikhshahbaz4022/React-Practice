@@ -11,13 +11,19 @@ function FormComponent() {
     let [formState, setformState] = useState(initialState)
 
 
+
+    // two Libraries
+    // a.Formik
+    // b.react-hook-form  
+
+
     const HandleSubmit = (e) => {
         e.preventDefault()
     }
 
     const HandleChange = (e) => {
-        console.log(e.target.value);
-        console.log(e.target.name);
+        // console.log(e.target.value);
+        // console.log(e.target.name);
         setformState({
             ...formState,
             [e.target.name]: e.target.value
