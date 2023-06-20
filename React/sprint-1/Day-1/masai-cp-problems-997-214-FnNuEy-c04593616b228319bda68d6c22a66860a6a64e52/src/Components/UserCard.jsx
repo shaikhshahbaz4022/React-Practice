@@ -4,7 +4,7 @@ import { useState } from "react"
 function UserCard({ name, avatar, posts, followers, address }) {
     const [follow, updatefn] = useState(false)
 
-    const change=()=>{
+    const change = () => {
         updatefn(!follow)
     }
 

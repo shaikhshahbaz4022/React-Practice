@@ -1,7 +1,7 @@
 import "./styles.module.css"
 
 export default function BookCard({ image, title, author, price, year }) {
-  // console.log(image);
+  
   return (
     <div id="main" data-testid='book-card'>
       <img id="img" src={image} alt={title} />

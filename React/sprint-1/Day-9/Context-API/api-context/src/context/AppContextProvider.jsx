@@ -15,11 +15,17 @@ let languages = {
 
 //step-2 --  a) create function 
 let AppContextProvider = ({ children }) => {
+
+    //use State
   const [language, setLanguage] = useState(languages.english)
+
+ // function For setting Language
   const HandleLanguages = (selectLanguage) => {
     let UpdatedLanguage = languages[selectLanguage] || languages.english
     setLanguage(UpdatedLanguage)
   }
+
+
   return (
     <AppContext.Provider value={{ language, HandleLanguages }} >{children}</AppContext.Provider>
   )
