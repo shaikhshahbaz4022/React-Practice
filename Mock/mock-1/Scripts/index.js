@@ -6,6 +6,8 @@ let descinp = document.getElementById("desc")
 let startinp = document.getElementById("start")
 let endinp = document.getElementById("end")
 let priorityinp = document.getElementById("priority")
+
+let arr = []
 formele.addEventListener("submit", (e) => {
     e.preventDefault()
     let obj = {
@@ -15,6 +17,6 @@ formele.addEventListener("submit", (e) => {
         end: endinp.value,
         priority: priorityinp.value
     }
-    console.log(obj);
-    localStorage.setItem("task-list", JSON.stringify(obj))
+    arr.push(obj)
+    localStorage.setItem("task-list", JSON.stringify(arr))
 })
