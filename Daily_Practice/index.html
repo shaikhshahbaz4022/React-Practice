@@ -1,0 +1,97 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Too;Tipp</title>
+    <style>
+        .to {
+            border: 2px solid violet;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+        }
+
+        button {
+            border: 1px solid  #5D4037;
+            font-size: 18px;
+            border-radius: 4px;
+        }
+
+        .too {
+            position: relative;
+            display: inline-block;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            margin: 15px;
+        }
+
+        .too .tootext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #5D4037;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            transition: top 0.3s, bottom 0.3s;
+        }
+
+        .too:hover .tootext {
+            visibility: visible;
+        }
+
+        .too:hover .tootext.up {
+            top: -25px;
+            bottom: auto;
+        }
+
+        .too:hover .tootext.down {
+            top: auto;
+            bottom: -25px;
+        }
+
+        .too:hover .tootext.left {
+            left: -135px;
+            right: auto;
+        }
+
+        .too:hover .tootext.right {
+            left: auto;
+            right: -135px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="to">
+
+        <button class="too">
+            Up
+            <span class="tootext up">text Up</span>
+        </button>
+        <button class="too">
+            Down
+            <span class="tootext down">text Down</span>
+        </button>
+        <button class="too">
+            Left
+            <span class="tootext left">text Left</span>
+        </button>
+        <button class="too">
+            Right
+            <span class="tootext right">text Right</span>
+        </button>
+    </div>
+</body>
+
+</html>
