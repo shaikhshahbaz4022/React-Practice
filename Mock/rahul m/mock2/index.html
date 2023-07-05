@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home Page</title>
+  <style>
+    /* All CSS For Home Page Goes Here  */
+    main {
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    #product-container>div {
+      width: 100%;
+      display: grid;
+      /* border: 1px solid black; */
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <h1>Web E-Commerce</h1>
+    <a href="./index.html">Home</a>
+    <a href="./cart.html">Cart</a>
+  </div>
+  <h1 id="alert"></h1>
+  <main>
+    <div id="filter">
+      <div id="brand-filter">
+        <h2>Filter By Brands</h2>
+        <div>
+          <input type="checkbox" id="roadster" />
+          <p>Roadster</p>
+        </div>
+        <div>
+          <input type="checkbox" id="blackberrys" />
+          <p>Blackberrys</p>
+        </div>
+        <div>
+          <input type="checkbox" id="van-heusen" />
+          <p>Van Heusen</p>
+        </div>
+        <div>
+          <input type="checkbox" id="allen-solly" />
+          <p>Allen Solly</p>
+        </div>
+        <div>
+          <input type="checkbox" id="twills" />
+          <p>Twills</p>
+        </div>
+      </div>
+      <div id="category-filter">
+        <h2>Filter By Categories</h2>
+        <div>
+          <input type="checkbox" id="men" />
+          <p>Men</p>
+        </div>
+        <div>
+          <input type="checkbox" id="women" />
+          <p>Women</p>
+        </div>
+        <div>
+          <input type="checkbox" id="homedecor" />
+          <p>Homedecor</p>
+        </div>
+        <div>
+          <input type="checkbox" id="kids" />
+          <p>Kids</p>
+        </div>
+      </div>
+    </div>
+    <div id="product-container">
+      <div>
+        <!-- Here Append All the Products  -->
+      </div>
+    </div>
+  </main>
+</body>
+<script type="module">
+  // All Your Script for Home Page Goes Here
+  let productContainer = document.querySelector("#product-container>div");
+  let brandFilter = document.querySelectorAll("input");
+  let brandTag = document.querySelectorAll("p")
+
+  let dataArr = [];
+  window.addEventListener("load", () => {
+    fetchAndRender();
+  })
+  async function fetchAndRender() {
+    try {
+      let res = await fetch("https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-products")
+      res = await res.json();
+      console.log(res);
+      dataArr = res.data;
+      display(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  function display(data) {
+    let str = "";
+    data.forEach((el, id) => {
+      str += `<div class="card" data-id="${el.id}">
+            <img src=${el.image} alt="photo">
+            <h3 class="name">${el.title}</h3>
+            <h4 class="brand">${el.brand}</h4>
+            <h5 class="category">${el.category}</h5>
+            <h5 class="price">${el.price}</h5>
+            <button class="addToCart">Add To Cart</button>
+          </div>`
+    })
+    productContainer.innerHTML = str;
+    let btn = document.querySelectorAll(".addToCart");
+    for (let i = 0; i < btn.length; i++) {
+      btn[i].addEventListener("click", () => {
+        let getArr = JSON.parse(localStorage.getItem("cart")) || [];
+        if(checkDuplicate(getArr, dataArr[i].id)){
+          getArr.push(dataArr[i].id)
+          localStorage.setItem("cart",JSON.stringify(getArr))
+          document.getElementById("alert").innerText = "Product added to The cart"
+        }else{
+          document.getElementById("alert").innerText = "Product already in the cart"
+        }
+      })
+    }
+  }
+  function checkDuplicate(arr, idx){
+    for(let i=0; i<arr.length; i++){
+      if(arr[i]==idx){
+        return false;
+      }
+    }
+    return true;
+  }
+  // let arr1 = [];
+  // for(let i=0; i<brandFilter.length; i++){
+  //   brandFilter[i].addEventListener("change", ()=>{
+  //     if(brandFilter[i].checked){
+  //       // console.log(brandTag[i].innerText);
+  //       // filtering(brandTag[i].innerText, data);
+  //       arr1.push(brandTag[i].innerText);
+  //     }
+  //   })
+  // }
+  // console.log(arr1);
+  // filtering(arr1, dataArr);
+  // function filtering(arr1, data){
+  //   data.forEach((el, i)=>{
+  //     for(let i=0; i<arr1.length; i++){
+  //       if(el.category==arr1[i] && el.brand==arr1[i])
+  //     }
+  //   })
+  // }
+
+
+</script>
+
+</html>

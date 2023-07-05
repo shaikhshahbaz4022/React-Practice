@@ -1,6 +1,7 @@
 // Write code related to dashboard page here
 let lSdata = JSON.parse(localStorage.getItem("task-list")) || []
 
+let priority_list_Arr = []
 
 let tbody = document.querySelector('tbody')
 let task_count = document.getElementById("task-count")
@@ -29,6 +30,10 @@ function DisplayAllData(data){
 
         let td6 = document.createElement("td")
         td6.innerText  = "Add"
+
+        td6.addEventListener("click",()=>{
+            
+        })
 
         tr.append(td1,td2,td3,td4,td5,td6)
         tbody.append(tr)
