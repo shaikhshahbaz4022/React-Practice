@@ -7,10 +7,11 @@ function Button({ text, onclick }) {
         <button
             onClick={onclick}
             style={{ 
-                backgroundColor: Theme === "dark" ? "white" : "black" ,
-                color : Theme=== "light" ? "white" : "black",
+                backgroundColor: Theme === "dark" ? "black" : "white" ,
+                color : Theme=== "dark" ? "white" : "black",
                 padding:"10px",
-                border : Theme==="dark"? "2px solid white" : "2px solid black"
+                border : Theme==="dark"? "2px solid white" : "2px solid black",
+                borderRadius:"3px"
         }}
         >
 

@@ -3,6 +3,7 @@ import './App.css';
 import { ThemeContext } from './Context/ThemeContextProvider';
 import { useContext } from 'react';
 import Button from './components/Buttom';
+import Login from './components/Login';
 function App() {
   const { Theme, ToggleTheme } = useContext(ThemeContext)
 
@@ -16,8 +17,12 @@ function App() {
         padding: "50px"
       }}>
       <h1>{Theme === "dark" ? "Dark Mode" : "Light Mode"}</h1>
-      <h1>{Theme}</h1>
+
       <Button text="Click here" onclick={ToggleTheme} />
+      <br />
+      <br />
+      <hr/>
+      <Login />
     </div>
   );
 }
