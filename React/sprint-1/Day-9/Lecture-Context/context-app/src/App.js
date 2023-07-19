@@ -2,12 +2,22 @@
 import './App.css';
 import { ThemeContext } from './Context/ThemeContextProvider';
 import { useContext } from 'react';
+import Button from './components/Buttom';
 function App() {
-  const {Theme , ToggleTheme} = useContext(ThemeContext)
+  const { Theme, ToggleTheme } = useContext(ThemeContext)
+
+
   return (
-    <div className="App">
+    <div className="App"
+
+      style={{
+        backgroundColor: Theme === "dark" ? "black" : "white",
+        color: Theme === "dark" ? "white" : "black",
+        padding: "50px"
+      }}>
+      <h1>{Theme === "dark" ? "Dark Mode" : "Light Mode"}</h1>
       <h1>{Theme}</h1>
-      <button onClick={ToggleTheme}>Click Here {Theme==="dark" ? "light" : "dark"}</button>
+      <Button text="Click here" onclick={ToggleTheme} />
     </div>
   );
 }
