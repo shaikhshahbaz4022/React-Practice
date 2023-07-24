@@ -42,6 +42,7 @@ function Navbar() {
       {Navlinks.map((ele) => {
         return (
           <NavLink
+            key={ele.to}
             to={ele.to}
             // style={({ isActive }) => (isActive ? ActiveState : InActiveState)}
             className={({ isActive }) =>
