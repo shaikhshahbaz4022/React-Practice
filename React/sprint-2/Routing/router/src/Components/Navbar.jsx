@@ -35,8 +35,9 @@ function Navbar() {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-around",
-        backgroundColor: "skyblue",
+        backgroundColor: "lightskyblue",
         color: "white",
+        padding: "10px",
       }}
     >
       {Navlinks.map((ele) => {
@@ -48,6 +49,11 @@ function Navbar() {
             className={({ isActive }) =>
               isActive ? styles.active : styles.default
             }
+            style={{
+              fontSize: "23px",
+              fontFamily: "sans-serif",
+              fontWeight: "bolder",
+            }}
           >
             {ele.label}
           </NavLink>
