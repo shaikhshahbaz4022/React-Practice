@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import styles from "./Navbar.module.css";
 
 function Navbar() {
   let Navlinks = [
@@ -19,14 +20,14 @@ function Navbar() {
       to: "/Users",
     },
   ];
-  let ActiveState = {
-    textDecoration: "none",
-    color: "green",
-  };
-  let InActiveState = {
-    textDecoration: "none",
-    color: "black",
-  };
+  //   let ActiveState = {
+  //     textDecoration: "none",
+  //     color: "green",
+  //   };
+  //   let InActiveState = {
+  //     textDecoration: "none",
+  //     color: "black",
+  //   };
 
   return (
     <div
@@ -42,7 +43,10 @@ function Navbar() {
         return (
           <NavLink
             to={ele.to}
-            style={({ isActive }) => (isActive ? ActiveState : InActiveState)}
+            // style={({ isActive }) => (isActive ? ActiveState : InActiveState)}
+            className={({ isActive }) =>
+              isActive ? styles.active : styles.default
+            }
           >
             {ele.label}
           </NavLink>
