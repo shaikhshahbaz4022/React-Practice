@@ -1,6 +1,33 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
+  let Navlinks = [
+    {
+      label: "Home",
+      to: "/",
+    },
+    {
+      label: "About",
+      to: "/About",
+    },
+    {
+      label: "Services",
+      to: "/Services",
+    },
+    {
+      label: "Users",
+      to: "/Users",
+    },
+  ];
+  let ActiveState = {
+    textDecoration: "none",
+    color: "green",
+  };
+  let InActiveState = {
+    textDecoration: "none",
+    color: "black",
+  };
+
   return (
     <div
       style={{
@@ -11,10 +38,16 @@ function Navbar() {
         color: "white",
       }}
     >
-      <Link to={"/"}>Home</Link>
-      <Link to="/About">About</Link>
-      <Link to="/Services">Services</Link>
-      <Link to="/Users">Users</Link>
+      {Navlinks.map((ele) => {
+        return (
+          <NavLink
+            to={ele.to}
+            style={({ isActive }) => (isActive ? ActiveState : InActiveState)}
+          >
+            {ele.label}
+          </NavLink>
+        );
+      })}
     </div>
   );
 }
