@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 
 function Users() {
   const [res, setRes] = useState({});
   const [loader, setloader] = useState(false);
   const [err, seterr] = useState(false);
+  const { isAuth } = useContext(AuthContext);
 
   function getdata(url) {
     return fetch(url).then((res) => res.json());
@@ -26,6 +28,10 @@ function Users() {
   useEffect(() => {
     displayData();
   }, []);
+
+  if (!isAuth) {
+    return <Navigate to={"/Login"} />;
+  }
   if (loader) {
     return <h1>Loading...</h1>;
   }

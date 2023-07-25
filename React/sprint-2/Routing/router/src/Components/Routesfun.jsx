@@ -5,6 +5,7 @@ import Services from "../Pages/Services";
 import Users from "../Pages/Users";
 import UserSinglePage from "../Pages/UsersSinglePage";
 import Notfound from "../Pages/NotFound";
+import LoginPage from "../Pages/Login";
 function Routesfun() {
   return (
     <Routes>
@@ -13,6 +14,8 @@ function Routesfun() {
       <Route path="/Services" element={<Services />}></Route>
       <Route path="/Users" element={<Users />}></Route>
       <Route path="/Users/:userID" element={<UserSinglePage />}></Route>
+      <Route path="/Login" element={<LoginPage />}></Route>
+
       <Route path="*" element={<Notfound />}></Route>
     </Routes>
   );
