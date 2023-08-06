@@ -1,11 +1,19 @@
-import { store } from "../redux/store";
-
+import { addCounter } from "../redux/action";
+// import { store } from "../redux/store";s
+import { useDispatch, useSelector } from "react-redux";
 const Counter = () => {
-  console.log(store.getState());
+  const dispatch = useDispatch();
+  const count = useSelector((store) => store.counter);
   return (
     <div>
-      <h1>Count : 0</h1>
-      <button>INC</button>
+      <h1>Count : {count}</h1>
+      <button
+        onClick={() => {
+          dispatch(addCounter(1));
+        }}
+      >
+        INC
+      </button>
     </div>
   );
 };
