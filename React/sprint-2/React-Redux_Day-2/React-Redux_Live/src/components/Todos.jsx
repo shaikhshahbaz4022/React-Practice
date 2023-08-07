@@ -11,7 +11,7 @@ const Todos = () => {
   const getTodos = () => {
     axios.get(`http://localhost:3004/todos`).then(({ data }) => {
       console.log(data);
-      dispatch(addtodos(data));
+      dispatch(addtodos(data)); // call dispatch when we get all the data
     });
   };
   const addTodo = () => {
@@ -21,6 +21,13 @@ const Todos = () => {
         status: false,
       })
       .then(() => getTodos());
+  };
+  const handleClick = (id) => {
+    console.log("dleete id", id);
+    axios
+      .delete(`http://localhost:3004/todos/${id}`)
+      .then(() => getTodos())
+      .catch((e) => console.log(e));
   };
   const [text, settext] = useState("");
   const todo = useSelector((store) => store.todos);
@@ -41,7 +48,9 @@ const Todos = () => {
       </button>
       <div>
         {todo.map((e, i) => (
-          <div key={i}>{e.title}</div>
+          <div key={i}>
+            {e.title} <button onClick={() => handleClick(e.id)}>DELETE</button>{" "}
+          </div>
         ))}
       </div>
     </div>

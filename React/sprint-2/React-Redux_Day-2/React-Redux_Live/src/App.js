@@ -8,6 +8,7 @@ function App() {
       <Counter />
       <hr />
       <Todos />
+      <hr />
     </div>
   );
 }
