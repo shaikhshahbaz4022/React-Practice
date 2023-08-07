@@ -1,10 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addtodos } from "../redux/action";
+import axios from "axios";
 
 const Todos = () => {
-  const [text, settext] = useState("");
   const dispatch = useDispatch();
+  useEffect(() => {
+    getTodos();
+  }, []);
+  const getTodos = () => {
+    axios.get(`http://localhost:3004/todos`).then(({ data }) => {
+      console.log(data);
+      dispatch(addtodos(data));
+    });
+  };
+  const addTodo = () => {
+    axios
+      .post(`http://localhost:3004/todos`, {
+        title: text,
+        status: false,
+      })
+      .then(() => getTodos());
+  };
+  const [text, settext] = useState("");
   const todo = useSelector((store) => store.todos);
   console.log(todo);
   return (
@@ -16,14 +34,14 @@ const Todos = () => {
       />
       <button
         onClick={() => {
-          dispatch(addtodos(text));
+          addTodo();
         }}
       >
         ADD TODOS
       </button>
       <div>
         {todo.map((e, i) => (
-          <div key={i}>{e}</div>
+          <div key={i}>{e.title}</div>
         ))}
       </div>
     </div>
