@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addtodos } from "../redux/action";
+import { addtodos } from "../redux/Todo/action";
 import axios from "axios";
 
 const Todos = () => {
+  const [text, settext] = useState("");
+  const todo = useSelector((store) => store.todoReducer.todos);
   const dispatch = useDispatch();
   useEffect(() => {
     getTodos();
@@ -29,9 +31,7 @@ const Todos = () => {
       .then(() => getTodos())
       .catch((e) => console.log(e));
   };
-  const [text, settext] = useState("");
-  const todo = useSelector((store) => store.todos);
-  console.log(todo);
+
   return (
     <div>
       <input
