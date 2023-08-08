@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addtodos, addTodosLoading, addTodosError } from "../redux/Todo/action";
+import {
+  addtodos,
+  addTodosLoading,
+  addTodosError,
+  getAllTodos,
+} from "../redux/Todo/action";
 import axios from "axios";
 
 const Todos = () => {
@@ -12,14 +17,7 @@ const Todos = () => {
     getTodos();
   }, []);
   const getTodos = () => {
-    dispatch(addTodosLoading());
-    axios
-      .get(`http://localhost:3004/todos`)
-      .then(({ data }) => {
-        console.log(data);
-        dispatch(addtodos(data)); // call dispatch when we get all the data
-      })
-      .catch((e) => dispatch(addTodosError()));
+    dispatch(getAllTodos());
   };
   const addTodo = () => {
     axios
