@@ -1,2 +1,4 @@
 
 export const ADD_TODOS = "ADD_TODOS"
+export const ADD_TODOS_LOADING = "ADD_TODOS_LOADING"
+export const ADD_TODOS_ERROR = "ADD_TODOS_ERROR"

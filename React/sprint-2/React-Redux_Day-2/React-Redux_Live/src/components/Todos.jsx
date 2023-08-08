@@ -1,20 +1,25 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addtodos } from "../redux/Todo/action";
+import { addtodos, addTodosLoading, addTodosError } from "../redux/Todo/action";
 import axios from "axios";
 
 const Todos = () => {
   const [text, settext] = useState("");
-  const todo = useSelector((store) => store.todoReducer.todos);
+  const { todos, loading, error } = useSelector((store) => store.todoReducer);
+
   const dispatch = useDispatch();
   useEffect(() => {
     getTodos();
   }, []);
   const getTodos = () => {
-    axios.get(`http://localhost:3004/todos`).then(({ data }) => {
-      console.log(data);
-      dispatch(addtodos(data)); // call dispatch when we get all the data
-    });
+    dispatch(addTodosLoading());
+    axios
+      .get(`http://localhost:3004/todos`)
+      .then(({ data }) => {
+        console.log(data);
+        dispatch(addtodos(data)); // call dispatch when we get all the data
+      })
+      .catch((e) => dispatch(addTodosError()));
   };
   const addTodo = () => {
     axios
@@ -32,7 +37,11 @@ const Todos = () => {
       .catch((e) => console.log(e));
   };
 
-  return (
+  return loading ? (
+    "LOADING..."
+  ) : error ? (
+    "ERROR"
+  ) : (
     <div>
       <input
         type="text"
@@ -47,7 +56,7 @@ const Todos = () => {
         ADD TODOS
       </button>
       <div>
-        {todo.map((e, i) => (
+        {todos.map((e, i) => (
           <div key={i}>
             {e.title} <button onClick={() => handleClick(e.id)}>DELETE</button>{" "}
           </div>
