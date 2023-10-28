@@ -31,7 +31,6 @@ function Login() {
         }
 
     }
-
     return (
         <div>
 
@@ -53,7 +52,7 @@ function Login() {
             />
             <button onClick={HandleClick}>Submit </button>
             <button onClick={() => navigate("/Login")} >Go To Login</button>
-            <Link to={"/Login"}> Go to  Home Page</Link>
+            <Link to={"/Login"}> Go to  Login</Link>
         </div>
     )
 }

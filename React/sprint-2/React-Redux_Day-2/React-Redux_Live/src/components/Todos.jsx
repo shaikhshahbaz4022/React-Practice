@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addtodos,
-  addTodosLoading,
-  addTodosError,
-  getAllTodos,
-} from "../redux/Todo/action";
+import { getAllTodos } from "../redux/Todo/action";
 import axios from "axios";
 
 const Todos = () => {

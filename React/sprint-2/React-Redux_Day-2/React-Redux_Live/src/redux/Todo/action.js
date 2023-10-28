@@ -14,7 +14,7 @@ export const addTodosLoading = () => {
 export const addTodosError = () => {
     return { type: ADD_TODOS_ERROR }
 }
-
+// async function 
 export const getAllTodos = () => (dispatch) => {
     dispatch(addTodosLoading());
     axios
